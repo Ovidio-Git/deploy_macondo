@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://placehold.co/32x32/6B9080/FFFFFF?text=OA"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-lang="pageTitle">Ovidio Andrade</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+            },
+            colors: {
+              background: "#FDFBF6", // Base - Very light beige/off-white
+              surface: "#FFFFFF", // Surfaces (cards, header) - Pure white
+              "primary-text": "#2D3748", // Dark Gray-Blue for main text
+              "secondary-text": "#4A5568", // Medium Gray-Blue for secondary text
+              accent: "#6B9080", // Muted Teal/Sage Green
+              "accent-hover": "#58776A", // Darker accent for hover
+              "subtle-border": "#EAEAEA", // Lighter, more subtle border
+            },
+            boxShadow: {
+              soft: "0 4px 12px rgba(0, 0, 0, 0.05)", // Slightly softer shadow
+              "soft-hover": "0 8px 18px rgba(0, 0, 0, 0.07)", // Slightly more pronounced hover
+            },
+            transitionTimingFunction: {
+              smooth: "cubic-bezier(0.4, 0, 0.2, 1)",
+            },
+            spacing: {
+              // Fine-tuning spacing if needed
+              18: "4.5rem",
+              22: "5.5rem",
+            },
+            borderRadius: {
+              xl: "0.75rem", // Slightly larger radius for cards/images
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Minimal custom CSS for refinements */
+      body {
+        font-family: "Inter", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      .mobile-menu {
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out, opacity 0.3s ease-out,
+          border-top-width 0.3s ease-out;
+        border-top: 0px solid theme("colors.subtle-border"); /* Start with no border */
+      }
+      .mobile-menu-active {
+        max-height: 500px; /* Adjust if menu content is taller */
+        opacity: 1;
+        border-top-width: 1px; /* Add border when active */
+        box-shadow: theme("boxShadow.soft");
+      }
+
+      .card-hover {
+        transition: box-shadow 0.3s theme("transitionTimingFunction.smooth"),
+          transform 0.3s theme("transitionTimingFunction.smooth"),
+          border-color 0.3s theme("transitionTimingFunction.smooth");
+        border: 1px solid theme("colors.subtle-border"); /* Subtle border by default */
+        background-color: theme("colors.surface");
+        border-radius: theme("borderRadius.xl"); /* Use extended radius */
+        box-shadow: theme("boxShadow.soft");
+        will-change: transform, box-shadow; /* Optimize animation */
+      }
+      .card-hover:hover {
+        box-shadow: theme("boxShadow.soft-hover");
+        transform: translateY(-5px); /* Slightly more lift */
+        /* Optional: Keep border subtle or highlight accent on hover */
+        /* border-color: theme('colors.accent'); */
+      }
+
+      /* Link styling */
+      .text-link {
+        color: theme("colors.accent");
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.2s ease-out;
+        position: relative; /* For potential underline effects */
+        padding-bottom: 2px; /* Space for underline */
+      }
+      .text-link::after {
+        /* Subtle underline effect */
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background-color: theme("colors.accent-hover");
+        transition: width 0.3s theme("transitionTimingFunction.smooth");
+      }
+      .text-link:hover {
+        color: theme("colors.accent-hover");
+      }
+      .text-link:hover::after {
+        width: 100%;
+      }
+
+      /* Language button style */
+      .lang-button {
+        opacity: 0.7;
+        transition: opacity 0.2s ease-out;
+      }
+      .lang-button.active,
+      .lang-button:hover {
+        opacity: 1;
+      }
+      /* Icon styling for consistency */
+      .icon-accent {
+        width: 2.75rem; /* 44px */
+        height: 2.75rem; /* 44px */
+        margin-bottom: 1.25rem; /* mb-5 */
+        color: theme("colors.accent");
+      }
+    </style>
+  </head>
+  <body class="antialiased bg-background text-primary-text">
+    <header
+      class="bg-surface/95 backdrop-blur-sm shadow-soft sticky top-0 z-50 border-b border-subtle-border/50"
+    >
+      <nav
+        class="container mx-auto px-6 py-3.5 flex justify-between items-center"
+      >
+        <a
+          href="#inicio"
+          class="transform scale-100 hover:scale-105 transition-transform duration-300 ease-smooth tracking-tight flex-shrink-0"
+        >
+          <img
+            src="https://placehold.co/32x32/6B9080/FFFFFF?text=OA"
+            alt="Logo de Ovidio Andrade"
+            class="w-8 h-8 md:w-10 md:h-10"
+          />
+        </a>
+
+        <div class="flex items-center space-x-4 md:space-x-6">
+          <div class="hidden md:flex space-x-6 lg:space-x-8 items-center">
+            <a
+              href="#inicio"
+              data-lang="navHome"
+              class="text-secondary-text hover:text-accent transition-colors duration-200 ease-smooth text-[15px] font-medium"
+              >Inicio</a
+            >
+            <a
+              href="#acerca"
+              data-lang="navAbout"
+              class="text-secondary-text hover:text-accent transition-colors duration-200 ease-smooth text-[15px] font-medium"
+              >Acerca de mí</a
+            >
+
+            <a
+              href="#portafolio"
+              data-lang="navPortfolio"
+              class="text-secondary-text hover:text-accent transition-colors duration-200 ease-smooth text-[15px] font-medium"
+              >Portafolio</a
+            >
+            <a
+              href="#expertise"
+              data-lang="navExpertise"
+              class="text-secondary-text hover:text-accent transition-colors duration-200 ease-smooth text-[15px] font-medium"
+              >Expertise</a
+            >
+            <a
+              href="#contacto"
+              data-lang="navContact"
+              class="bg-accent hover:bg-accent-hover text-white font-medium py-2 px-5 rounded-lg transition-all duration-300 ease-smooth text-sm shadow-sm hover:shadow-md transform hover:-translate-y-0.5"
+              >Contacto</a
+            >
+          </div>
+
+          <div
+            class="flex space-x-2 border-l border-subtle-border pl-4 ml-2 md:ml-4"
+          >
+            <button
+              id="lang-es"
+              class="lang-button text-sm font-semibold text-secondary-text p-1"
+              data-lang-switch="es"
+            >
+              ES
+            </button>
+            <span class="text-secondary-text opacity-40">|</span>
+            <button
+              id="lang-en"
+              class="lang-button text-sm font-semibold text-secondary-text p-1"
+              data-lang-switch="en"
+            >
+              EN
+            </button>
+          </div>
+
+          <div class="md:hidden ml-2">
+            <button
+              id="mobile-menu-button"
+              class="text-primary-text focus:outline-none p-1"
+            >
+              <svg
+                id="menu-icon-open"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                />
+              </svg>
+              <svg
+                id="menu-icon-close"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6 hidden"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      <div
+        id="mobile-menu"
+        class="mobile-menu md:hidden bg-surface absolute w-full shadow-lg"
+      >
+        <a
+          href="#inicio"
+          data-lang="navHomeMobile"
+          class="block px-6 py-3 text-secondary-text hover:bg-background hover:text-accent transition-colors duration-200 ease-smooth"
+          >Inicio</a
+        >
+        <a
+          href="#expertise"
+          data-lang="navExpertiseMobile"
+          class="block px-6 py-3 text-secondary-text hover:bg-background hover:text-accent transition-colors duration-200 ease-smooth"
+          >Expertise</a
+        >
+        <a
+          href="#portafolio"
+          data-lang="navPortfolioMobile"
+          class="block px-6 py-3 text-secondary-text hover:bg-background hover:text-accent transition-colors duration-200 ease-smooth"
+          >Portafolio</a
+        >
+        <a
+          href="#acerca"
+          data-lang="navAboutMobile"
+          class="block px-6 py-3 text-secondary-text hover:bg-background hover:text-accent transition-colors duration-200 ease-smooth"
+          >Acerca de mí</a
+        >
+        <a
+          href="#contacto"
+          data-lang="navContactMobile"
+          class="block mx-4 my-4 px-6 py-3 bg-accent text-white text-center font-medium rounded-lg hover:bg-accent-hover transition-colors duration-300 ease-smooth"
+          >Contacto</a
+        >
+      </div>
+    </header>
+
+    <main>
+      <section id="inicio" class="bg-background pt-28 pb-24 md:pt-40 md:pb-36">
+        <div class="container mx-auto px-6 text-center">
+          <h1
+            data-lang="heroTitle"
+            class="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-text mb-5 leading-tight tracking-tighter"
+          >
+            Ingeniero de Software Full-Cycle: <br class="hidden md:block" />
+            Soluciones Backend, Cloud &amp; AI
+          </h1>
+          <p
+            data-lang="heroSubtitle"
+            class="text-lg md:text-xl text-secondary-text mb-10 max-w-3xl mx-auto leading-relaxed"
+          >
+            Especialista en Python y AWS con +5 años de experiencia diseñando,
+            implementando y desplegando aplicaciones robustas y escalables,
+            desde el concepto hasta el mantenimiento.
+          </p>
+          <a
+            href="#contacto"
+            data-lang="heroCta"
+            class="inline-block bg-accent hover:bg-accent-hover text-white font-semibold py-3 px-8 rounded-lg text-base transition-all duration-300 ease-smooth shadow-md hover:shadow-lg transform hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent focus:ring-offset-background"
+          >
+            Hablemos de tu Proyecto
+          </a>
+        </div>
+      </section>
+
+      <section id="acerca" class="py-20 md:py-28 bg-surface">
+        <div class="container mx-auto px-6">
+          <div
+            class="flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-20"
+          >
+            <div
+              class="lg:w-2/5 flex justify-center lg:justify-end order-1 lg:order-2"
+            >
+              <img
+                src="./static/img/profile_image.jpeg"
+                alt="Foto profesional de Ovidio Andrade"
+                class="rounded-xl shadow-soft w-full max-w-xs sm:max-w-sm md:max-w-md object-cover border border-subtle-border aspect-[4/5]"
+                loading="lazy"
+                width="450"
+                height="563"
+              />
+            </div>
+            <div
+              class="lg:w-3/5 text-center lg:text-left order-2 lg:order-1 max-w-xl lg:max-w-none mx-auto"
+            >
+              <h2
+                data-lang="aboutTitle"
+                class="text-3xl md:text-4xl font-semibold text-primary-text mb-6 tracking-tight"
+              >
+                Hola, soy Ovidio Andrade
+              </h2>
+              <div
+                class="space-y-5 text-secondary-text leading-relaxed text-base md:text-lg"
+              >
+                <p data-lang="aboutP1">
+                  Ingeniero Electrónico con más de 5 años de experiencia inmerso
+                  en el desarrollo de software. Me especializo en
+                  <strong class="font-medium text-primary-text">Python</strong>
+                  y tecnologías
+                  <strong class="font-medium text-primary-text">backend</strong>
+                  (Flask, Django, FastAPI), bases de datos (SQL/NoSQL como
+                  MongoDB, PostgreSQL) y plataformas
+                  <strong class="font-medium text-primary-text">cloud</strong>,
+                  con un enfoque profundo en
+                  <strong class="font-medium text-primary-text">AWS</strong>.
+                </p>
+                <p data-lang="aboutP2">
+                  Mi expertise abarca el
+                  <strong class="font-medium text-primary-text"
+                    >ciclo completo de desarrollo</strong
+                  >: desde el diseño de features y la arquitectura,
+                  implementación con código limpio, hasta el despliegue (Docker,
+                  Kubernetes), monitoreo, y prácticas
+                  <strong class="font-medium text-primary-text">DevOps</strong>
+                  (CI/CD). También poseo experiencia en frontend (React), web
+                  scraping, RPA e integración de
+                  <strong class="font-medium text-primary-text">IA</strong>,
+                  incluyendo RAGs.
+                </p>
+                <p data-lang="aboutP3">
+                  Me apasiona resolver problemas complejos y entregar
+                  <strong class="font-medium text-primary-text"
+                    >soluciones eficientes y escalables</strong
+                  >. Siempre busco roles que desafíen y expandan mi conocimiento
+                  técnico, contribuyendo activamente al éxito del proyecto.
+                </p>
+              </div>
+
+              <div class="pro-tip text-left mt-8 bg-background p-6 rounded-lg">
+                <div class="flex items-center mb-2 gap-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-6 h-6"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+                    />
+                  </svg>
+                  <strong
+                    class="font-semibold text-primary-text block"
+                    data-lang="philosophyCode"
+                    >Filosofía de Código:</strong
+                  >
+                </div>
+
+                <div>
+                  <span data-lang="philosophyCodeDescription"
+                    >Creo en el código limpio, bien documentado y testeado.
+                    Aplicar principios SOLID y patrones de diseño no es solo una
+                    buena práctica, es esencial para la mantenibilidad y
+                    escalabilidad a largo plazo.</span
+                  >
+                </div>
+              </div>
+              <div
+                class="mt-8 text-center lg:text-left flex items-center gap-1  transition-transform duration-300 ease-smooth hover:translate-x-1"
+              >
+                <a
+                  href="https://www.linkedin.com/in/ovidioandrade/"
+                  data-lang="aboutLink"
+                  target="_blank"
+                  class="text-link font-medium inline-flex hover:text-accent transition-colors duration-200 ease-smooth"
+                >
+                  Conectar en LinkedIn
+                </a>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-5 h-5 ml-2"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+                  />
+                </svg>
+              </div>
+
+              <div
+                class="mt-2 text-center lg:text-left flex items-center gap-1 transition-transform duration-300 ease-smooth hover:translate-x-1"
+              >
+                <a
+                  href="./static/cv/CVOvidioAndrade_EN.pdf"
+                  data-lang="aboutCV"
+                  target="_blank"
+                  class="text-link font-medium inline-flex hover:text-accent transition-colors duration-200 ease-smooth"
+                >
+                  Descargar CV
+                </a>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-5 h-5 ml-2"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="portafolio" class="py-20 md:py-28 bg-background">
+        <div class="container mx-auto px-6">
+          <h2
+            data-lang="portfolioTitle"
+            class="text-3xl md:text-4xl font-semibold text-center text-primary-text mb-16 md:mb-20 tracking-tight"
+          >
+            Proyectos Destacados
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            <div
+              class="bg-surface overflow-hidden border border-subtle-border rounded-xl overflow-hidden group card-hover flex flex-col transition-all duration-300 ease-smooth shadow-md hover:shadow-lg transform hover:-translate-y-1"
+            >
+              <img
+                src="https://placehold.co/600x400/A3B18A/3A3A3A?text=Management+System"
+                alt="Vista previa Plataforma Gestión"
+                class="w-full h-56 object-cover transition duration-300 ease-smooth"
+                loading="lazy"
+                width="600"
+                height="400"
+              />
+              <div class="p-6 md:p-8 flex flex-col flex-grow">
+                <h3
+                  data-lang="portfolioCard1Title"
+                  class="text-lg font-semibold text-primary-text mb-2"
+                >
+                  Sistema Backend para Gestión de Procesos
+                </h3>
+                <p
+                  data-lang="portfolioCard1Desc"
+                  class="text-secondary-text text-sm mb-4 flex-grow"
+                >
+                  Desarrollo de APIs custom y optimización de BBDD para
+                  plataforma compleja. Implementación CI/CD en AWS.
+                </p>
+                <a
+                  href="#"
+                  data-lang="portfolioCard1Link"
+                  class="text-link text-sm font-medium mt-auto self-start"
+                  >Ver Detalles (Próximamente)</a
+                >
+              </div>
+            </div>
+            <div
+              class="bg-surface overflow-hidden border border-subtle-border rounded-xl overflow-hidden group card-hover flex flex-col transition-all duration-300 ease-smooth shadow-md hover:shadow-lg transform hover:-translate-y-1"
+            >
+              <img
+                src="https://placehold.co/600x400/DAD7CD/3A3A3A?text=AI+Service+Plataform"
+                alt="Vista previa Plataforma AI"
+                class="w-full h-56 object-cover transition duration-300 ease-smooth"
+                loading="lazy"
+                width="600"
+                height="400"
+              />
+              <div class="p-6 md:p-8 flex flex-col flex-grow">
+                <h3
+                  data-lang="portfolioCard2Title"
+                  class="text-lg font-semibold text-primary-text mb-2"
+                >
+                  Plataforma con Servicios AI (Transcripción)
+                </h3>
+                <p
+                  data-lang="portfolioCard2Desc"
+                  class="text-secondary-text text-sm mb-4 flex-grow"
+                >
+                  Integración de modelos de IA para transcripción y análisis de
+                  audio, mejorando significativamente la productividad del
+                  usuario final.
+                </p>
+                <a
+                  href="#"
+                  data-lang="portfolioCard2Link"
+                  class="text-link text-sm font-medium mt-auto self-start"
+                  >Ver Detalles (Próximamente)</a
+                >
+              </div>
+            </div>
+            <div
+              class="bg-surface overflow-hidden border border-subtle-border rounded-xl overflow-hidden group card-hover flex flex-col transition-all duration-300 ease-smooth shadow-md hover:shadow-lg transform hover:-translate-y-1"
+            >
+              <img
+                src="https://placehold.co/600x400/588157/FFFFFF?text=Cloud+Automation"
+                alt="Vista previa Automatización Datos"
+                class="w-full h-56 object-cover transition duration-300 ease-smooth"
+                loading="lazy"
+                width="600"
+                height="400"
+              />
+              <div class="p-6 md:p-8 flex flex-col flex-grow">
+                <h3
+                  data-lang="portfolioCard3Title"
+                  class="text-lg font-semibold text-primary-text mb-2"
+                >
+                  Automatización de Datos y Despliegue Cloud
+                </h3>
+                <p
+                  data-lang="portfolioCard3Desc"
+                  class="text-secondary-text text-sm mb-4 flex-grow"
+                >
+                  Uso de RPA/Scraping para ingesta de datos, containerización
+                  (Docker) y despliegue serverless optimizado en AWS.
+                </p>
+                <a
+                  href="#"
+                  data-lang="portfolioCard3Link"
+                  class="text-link text-sm font-medium mt-auto self-start"
+                  >Ver Detalles (Próximamente)</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="expertise" class="py-20 md:py-28 bg-surface">
+        <div class="container mx-auto px-6">
+          <h2
+            data-lang="expertiseTitle"
+            class="text-3xl md:text-4xl font-semibold text-center text-primary-text mb-16 md:mb-20 tracking-tight"
+          >
+            Áreas de Expertise
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div
+              class="bg-background p-8 rounded-lg border border-subtle-border card-hover transition-all duration-300 ease-smooth"
+            >
+              <img
+                src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/database-zap.svg"
+                alt="Backend Icon"
+                class="icon-accent"
+              />
+              <h3
+                data-lang="expertiseCard1Title"
+                class="text-lg font-semibold text-primary-text mb-3"
+              >
+                Backend Development &amp; APIs
+              </h3>
+              <p
+                data-lang="expertiseCard1Desc"
+                class="text-secondary-text text-sm leading-relaxed"
+              >
+                Diseño y desarrollo de APIs RESTful robustas y sistemas backend
+                eficientes con Python (Flask, Django, FastAPI) y bases de datos
+                SQL/NoSQL.
+              </p>
+            </div>
+            <div
+              class="bg-background p-8 rounded-lg border border-subtle-border card-hover transition-all duration-300 ease-smooth"
+            >
+              <img
+                src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/cloud-cog.svg"
+                alt="Cloud DevOps Icon"
+                class="icon-accent"
+              />
+              <h3
+                data-lang="expertiseCard2Title"
+                class="text-lg font-semibold text-primary-text mb-3"
+              >
+                Cloud Architecture &amp; DevOps
+              </h3>
+              <p
+                data-lang="expertiseCard2Desc"
+                class="text-secondary-text text-sm leading-relaxed"
+              >
+                Experiencia sólida en AWS y GCP. Orquestación con
+                Docker/Kubernetes, implementación de CI/CD, y
+                administración/mantenimiento de infraestructura.
+              </p>
+            </div>
+            <div
+              class="bg-background p-8 rounded-lg border border-subtle-border card-hover transition-all duration-300 ease-smooth"
+            >
+              <img
+                src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/brain-circuit.svg"
+                alt="Full Stack AI Icon"
+                class="icon-accent"
+              />
+              <h3
+                data-lang="expertiseCard3Title"
+                class="text-lg font-semibold text-primary-text mb-3"
+              >
+                Full-Stack &amp; AI Integration
+              </h3>
+              <p
+                data-lang="expertiseCard3Desc"
+                class="text-secondary-text text-sm leading-relaxed"
+              >
+                Desarrollo end-to-end con React/Angular y integración de
+                servicios de IA (incluyendo RAGs) para crear soluciones
+                inteligentes y completas.
+              </p>
+            </div>
+            <div
+              class="bg-background p-8 rounded-lg border border-subtle-border card-hover transition-all duration-300 ease-smooth"
+            >
+              <img
+                src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/bot-message-square.svg"
+                alt="Data Automation Icon"
+                class="icon-accent"
+              />
+              <h3
+                data-lang="expertiseCard4Title"
+                class="text-lg font-semibold text-primary-text mb-3"
+              >
+                Data Engineering &amp; Automation
+              </h3>
+              <p
+                data-lang="expertiseCard4Desc"
+                class="text-secondary-text text-sm leading-relaxed"
+              >
+                Optimización de consultas, web scraping, RPA para recolección de
+                datos, y diseño de sistemas de búsqueda avanzada y
+                almacenamiento eficiente.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contacto" class="py-20 md:py-28 bg-background">
+        <div class="container mx-auto px-6 text-center max-w-2xl">
+          <h2
+            data-lang="contactTitle"
+            class="text-3xl md:text-4xl font-semibold text-primary-text mb-4 tracking-tight"
+          >
+            ¿Listo para Construir Algo Increíble?
+          </h2>
+          <p
+            data-lang="contactSubtitle"
+            class="text-lg text-secondary-text mb-10 leading-relaxed"
+          >
+            Si buscas un ingeniero de software comprometido, con experiencia
+            probada en el ciclo completo de desarrollo y enfocado en resultados,
+            hablemos. Estoy listo para afrontar tu próximo desafío técnico.
+          </p>
+          <a
+            href="mailto:tuemail@example.com?subject=Contacto%20desde%20Portafolio%20Web%20-%20Ovidio%20Andrade"
+            data-lang="contactCta"
+            class="inline-block bg-accent hover:bg-accent-hover text-white font-semibold py-3 px-8 rounded-lg text-base transition-all duration-300 ease-smooth shadow-md hover:shadow-lg transform hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent focus:ring-offset-background"
+          >
+            Contáctame por Email
+          </a>
+          <p
+            data-lang="contactSocialPrompt"
+            class="text-sm text-secondary-text mt-8"
+          >
+            También puedes encontrarme en
+            <a href="#" class="text-link font-medium">LinkedIn</a>.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bg-surface border-t border-subtle-border py-10 mt-1">
+      <div class="container mx-auto px-6 text-center">
+        <a
+          href="#inicio"
+          class="text-xl font-bold text-primary-text hover:text-accent transition-colors duration-300 ease-smooth mb-5 inline-block tracking-tight"
+        >
+          OA
+        </a>
+
+        <nav
+          class="flex justify-center space-x-5 md:space-x-6 mb-6"
+          aria-label="Footer navigation"
+        >
+          <a
+            href="#expertise"
+            data-lang="footerNavExpertise"
+            class="text-secondary-text hover:text-accent transition-colors duration-200 ease-smooth text-sm"
+            >Expertise</a
+          >
+          <a
+            href="#portafolio"
+            data-lang="footerNavPortfolio"
+            class="text-secondary-text hover:text-accent transition-colors duration-200 ease-smooth text-sm"
+            >Portafolio</a
+          >
+          <a
+            href="#acerca"
+            data-lang="footerNavAbout"
+            class="text-secondary-text hover:text-accent transition-colors duration-200 ease-smooth text-sm"
+            >Acerca</a
+          >
+          <a
+            href="#contacto"
+            data-lang="footerNavContact"
+            class="text-secondary-text hover:text-accent transition-colors duration-200 ease-smooth text-sm"
+            >Contacto</a
+          >
+          <a
+            href="./static/cv/CVOvidioAndrade_EN.pdf"
+            data-lang="footerNavDownload"
+            target="_blank"
+            class="text-secondary-text hover:text-accent transition-colors duration-200 ease-smooth text-sm"
+            >Descargar CV</a
+          >
+        </nav>
+        <div class="flex justify-center space-x-5 mb-6">
+          <a
+            href="https://www.linkedin.com/in/ovidioandrade/"
+            target="_blank"
+            aria-label="LinkedIn Profile"
+            class="text-secondary-text/80 hover:text-accent transition-colors duration-300 ease-smooth"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-linkedin"
+            >
+              <path
+                d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
+              />
+              <rect width="4" height="12" x="2" y="9" />
+              <circle cx="4" cy="4" r="2" />
+            </svg>
+          </a>
+          <a
+            href="https://github.com/Ovidio-Git"
+            target="_blank"
+            aria-label="GitHub Profile"
+            class="text-secondary-text/80 hover:text-accent transition-colors duration-300 ease-smooth"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-github"
+            >
+              <path
+                d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-1.5 6-6.5.08-1.3-.32-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 5 3 6.5 6 6.5a4.8 4.8 0 0 0-1 3.5v4"
+              />
+            </svg>
+          </a>
+        </div>
+        <p data-lang="footerCopyright" class="text-xs text-secondary-text/70">
+          &copy; <span id="current-year"></span> Ovidio Andrade. Ingeniería de
+          Software con Pasión.
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      // --- Language Data ---
+      const langData = {
+        es: {
+          pageTitle:
+            "Ovidio Andrade - Ingeniero de Software | Backend, Cloud & AI",
+          navHome: "Inicio",
+          navExpertise: "Expertise",
+          navPortfolio: "Portafolio",
+          navAbout: "Acerca de mí",
+          navContact: "Contacto",
+          navHomeMobile: "Inicio",
+          navExpertiseMobile: "Expertise",
+          navPortfolioMobile: "Portafolio",
+          navAboutMobile: "Acerca de mí",
+          navContactMobile: "Contacto",
+          heroTitle:
+            "Ingeniero de Software Full-Cycle: Soluciones Backend, Cloud & AI",
+          heroSubtitle:
+            "Especialista en Python y AWS con +5 años de experiencia diseñando, implementando y desplegando aplicaciones robustas y escalables, desde el concepto hasta el mantenimiento.",
+          heroCta: "Hablemos de tu Proyecto",
+          expertiseTitle: "Áreas de Expertise",
+          expertiseCard1Title: "Backend Development & APIs",
+          expertiseCard1Desc:
+            "Diseño y desarrollo de APIs RESTful robustas y sistemas backend eficientes con Python (Flask, Django, FastAPI) y bases de datos SQL/NoSQL.",
+          expertiseCard2Title: "Cloud Architecture & DevOps",
+          expertiseCard2Desc:
+            "Experiencia sólida en AWS y GCP. Orquestación con Docker/Kubernetes, implementación de CI/CD, y administración/mantenimiento de infraestructura.",
+          expertiseCard3Title: "Full-Stack & AI Integration",
+          expertiseCard3Desc:
+            "Desarrollo end-to-end con React/Angular y integración de servicios de IA (incluyendo RAGs) para crear soluciones inteligentes y completas.",
+          expertiseCard4Title: "Data Engineering & Automation",
+          expertiseCard4Desc:
+            "Optimización de consultas, web scraping, RPA para recolección de datos, y diseño de sistemas de búsqueda avanzada y almacenamiento eficiente.",
+          portfolioTitle: "Proyectos Destacados",
+          portfolioCard1Title: "Sistema Backend para Gestión de Procesos",
+          portfolioCard1Desc:
+            "Desarrollo de APIs custom y optimización de BBDD para plataforma compleja. Implementación CI/CD en AWS.",
+          portfolioCard1Link: "Ver Detalles (Próximamente)",
+          portfolioCard2Title: "Plataforma con Servicios AI (Transcripción)",
+          portfolioCard2Desc:
+            "Integración de modelos de IA para transcripción y análisis de audio, mejorando significativamente la productividad del usuario final.",
+          portfolioCard2Link: "Ver Detalles (Próximamente)",
+          portfolioCard3Title: "Automatización de Datos y Despliegue Cloud",
+          portfolioCard3Desc:
+            "Uso de RPA/Scraping para ingesta de datos, containerización (Docker) y despliegue serverless optimizado en AWS.",
+          portfolioCard3Link: "Ver Detalles (Próximamente)",
+          aboutTitle: "Hola, soy Ovidio Andrade",
+          aboutP1:
+            "Ingeniero Electrónico con más de 5 años de experiencia inmerso en el desarrollo de software. Me especializo en Python y tecnologías backend (Flask, Django, FastAPI), bases de datos (SQL/NoSQL como MongoDB, PostgreSQL) y plataformas cloud, con un enfoque profundo en AWS.",
+          aboutP2:
+            "Mi expertise abarca el ciclo completo de desarrollo: desde el diseño de features y la arquitectura, implementación con código limpio, hasta el despliegue (Docker, Kubernetes), monitoreo, y prácticas DevOps (CI/CD). También poseo experiencia en frontend (React), web scraping, RPA e integración de IA, incluyendo RAGs.",
+          aboutP3:
+            "Me apasiona resolver problemas complejos y entregar soluciones eficientes y escalables. Siempre busco roles que desafíen y expandan mi conocimiento técnico, contribuyendo activamente al éxito del proyecto.",
+          aboutLink: "Conectar en LinkedIn",
+          aboutCV: "Descargar CV",
+          contactTitle: "¿Listo para Construir Algo Increíble?",
+          contactSubtitle:
+            "Si buscas un ingeniero de software comprometido, con experiencia probada en el ciclo completo de desarrollo y enfocado en resultados, hablemos. Estoy listo para afrontar tu próximo desafío técnico.",
+          contactCta: "Contáctame por Email",
+          contactSocialPrompt: "También puedes encontrarme en LinkedIn.",
+          footerNavExpertise: "Expertise",
+          footerNavPortfolio: "Portafolio",
+          footerNavAbout: "Acerca",
+          footerNavContact: "Contacto",
+          footerNavDownload: "Descargar CV",
+          footerCopyright:
+            "© {year} Ovidio Andrade. Software con Pasión.",
+          philosophyCode: "Filosofía de Código:",
+          philosophyCodeDescription:
+            "Creo en el código limpio, bien documentado y testeado. Aplicar principios SOLID y patrones de diseño no es solo una buena práctica, es esencial para la mantenibilidad y escalabilidad a largo plazo.",
+        },
+        en: {
+          pageTitle: "Ovidio Andrade | Engineer",
+          navHome: "Home",
+          navExpertise: "Expertise",
+          navPortfolio: "Portfolio",
+          navAbout: "About Me",
+          navContact: "Contact",
+          navHomeMobile: "Home",
+          navExpertiseMobile: "Expertise",
+          navPortfolioMobile: "Portfolio",
+          navAboutMobile: "About Me",
+          navContactMobile: "Contact",
+          heroTitle:
+            "Full-Cycle Software Engineer: Backend, Cloud & AI Solutions",
+          heroSubtitle:
+            "Python and AWS specialist with +5 years of experience designing, implementing, and deploying robust and scalable applications, from concept to maintenance.",
+          heroCta: "Let's Discuss Your Project",
+          expertiseTitle: "Areas of Expertise",
+          expertiseCard1Title: "Backend Development & APIs",
+          expertiseCard1Desc:
+            "Design and development of robust RESTful APIs and efficient backend systems using Python (Flask, Django, FastAPI) and SQL/NoSQL databases.",
+          expertiseCard2Title: "Cloud Architecture & DevOps",
+          expertiseCard2Desc:
+            "Solid experience in AWS and GCP. Orchestration with Docker/Kubernetes, CI/CD implementation, and infrastructure administration/maintenance.",
+          expertiseCard3Title: "Full-Stack & AI Integration",
+          expertiseCard3Desc:
+            "End-to-end development with React/Angular and integration of AI services (including RAGs) to create intelligent and complete solutions.",
+          expertiseCard4Title: "Data Engineering & Automation",
+          expertiseCard4Desc:
+            "Query optimization, web scraping, RPA for data collection, and design of advanced search systems and efficient storage.",
+          portfolioTitle: "Featured Projects",
+          portfolioCard1Title: "Backend System for Process Management",
+          portfolioCard1Desc:
+            "Development of custom APIs and DB optimization for a complex platform. CI/CD implementation on AWS.",
+          portfolioCard1Link: "View Details (Coming Soon)",
+          portfolioCard2Title: "Platform with AI Services (Transcription)",
+          portfolioCard2Desc:
+            "AI model integration for audio transcription and analysis, significantly improving end-user productivity.",
+          portfolioCard2Link: "View Details (Coming Soon)",
+          portfolioCard3Title: "Data Automation and Cloud Deployment",
+          portfolioCard3Desc:
+            "Use of RPA/Scraping for data ingestion, containerization (Docker), and optimized serverless deployment on AWS.",
+          portfolioCard3Link: "View Details (Coming Soon)",
+          aboutTitle: "Hi, I'm Ovidio Andrade",
+          aboutP1:
+            "Electronics Engineer with over 5 years immersed in software development. I specialize in Python and backend technologies (Flask, Django, FastAPI), databases (SQL/NoSQL like MongoDB, PostgreSQL), and cloud platforms, with a deep focus on AWS.",
+          aboutP2:
+            "My expertise covers the full development lifecycle: from feature design and architecture, implementation with clean code, to deployment (Docker, Kubernetes), monitoring, and DevOps practices (CI/CD). I also have experience in frontend (React), web scraping, RPA, and AI integration, including RAGs.",
+          aboutP3:
+            "I am passionate about solving complex problems and delivering efficient and scalable solutions. I always seek roles that challenge and expand my technical knowledge, actively contributing to project success.",
+          aboutLink: "Connect on LinkedIn",
+          aboutCV: "Download CV",
+          contactTitle: "Ready to Build Something Incredible?",
+          contactSubtitle:
+            "If you're looking for a committed software engineer with proven full-cycle development experience and a focus on results, let's talk. I'm ready to tackle your next technical challenge.",
+          contactCta: "Contact Me via Email",
+          contactSocialPrompt: "You can also find me on LinkedIn.",
+          footerNavExpertise: "Expertise",
+          footerNavPortfolio: "Portfolio",
+          footerNavAbout: "About",
+          footerNavContact: "Contact",
+          footerNavDownload: "Download CV",
+          footerCopyright:
+            "© {year} Ovidio Andrade. Software with Passion.",
+
+          philosophyCode: "Code Philosophy:",
+          philosophyCodeDescription:
+            "I believe in clean, well-documented, and tested code. Applying SOLID principles and design patterns is not just a good practice; it's essential for long-term maintainability and scalability.",
+        },
+      };
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const mobileMenuButton = document.getElementById("mobile-menu-button");
+        const mobileMenu = document.getElementById("mobile-menu");
+        const menuIconOpen = document.getElementById("menu-icon-open");
+        const menuIconClose = document.getElementById("menu-icon-close");
+        const langButtons = document.querySelectorAll("[data-lang-switch]");
+        const currentYearSpan = document.getElementById("current-year");
+
+        // --- Mobile Menu Toggle ---
+        mobileMenuButton.addEventListener("click", () => {
+          mobileMenu.classList.toggle("mobile-menu-active");
+          menuIconOpen.classList.toggle("hidden");
+          menuIconClose.classList.toggle("hidden");
+        });
+
+        // Close mobile menu when a link is clicked
+        mobileMenu.querySelectorAll("a").forEach((link) => {
+          link.addEventListener("click", () => {
+            mobileMenu.classList.remove("mobile-menu-active");
+            menuIconOpen.classList.remove("hidden");
+            menuIconClose.classList.add("hidden");
+          });
+        });
+
+        // --- Language Switching ---
+        let currentLang = "en"; // Default language
+
+        const updateTexts = (lang) => {
+          const data = langData[lang];
+          document.querySelectorAll("[data-lang]").forEach((el) => {
+            const key = el.getAttribute("data-lang");
+            if (data[key]) {
+              // Handle copyright year replacement
+              if (key === "footerCopyright") {
+                el.innerHTML = data[key].replace(
+                  "{year}",
+                  new Date().getFullYear()
+                );
+              } else {
+                el.innerHTML = data[key]; // Use innerHTML to allow tags like <br>
+              }
+              // Special case for page title
+              if (key === "pageTitle") {
+                document.title = data[key];
+              }
+            }
+          });
+          // Update active button style
+          langButtons.forEach((btn) => {
+            if (btn.getAttribute("data-lang-switch") === lang) {
+              btn.classList.add("active");
+            } else {
+              btn.classList.remove("active");
+            }
+          });
+          // Update html lang attribute
+          document.documentElement.lang = lang;
+        };
+
+        langButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            const lang = button.getAttribute("data-lang-switch");
+            if (lang !== currentLang) {
+              currentLang = lang;
+              updateTexts(currentLang);
+            }
+          });
+        });
+
+        // --- Set Current Year ---
+        if (currentYearSpan) {
+          currentYearSpan.textContent = new Date().getFullYear();
+        }
+
+        // --- Initial Load ---
+        updateTexts(currentLang); // Load default language texts
+      });
+    </script>
+  </body>
+</html>
